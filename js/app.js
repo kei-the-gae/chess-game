@@ -13,7 +13,10 @@ const boardElement = document.querySelector(".board");
 
 /*-------------- Functions -------------*/
 
-
+const init = () => {
+    board = startingBoard;
+    render();
+}
 
 /*----------- Event Listeners ----------*/
 

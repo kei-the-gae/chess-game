@@ -24,6 +24,9 @@ const startingBoard = [
     // white start
 ];
 
+const whitePieces = [];
+const blackPieces = [];
+
 class Pieces {
     constructor(name, position) {
         this.name = name

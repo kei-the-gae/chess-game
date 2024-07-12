@@ -1,13 +1,26 @@
 const board = [
     // black start
-    ["rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"],
-    ["pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn"],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn"],
-    ["rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    // white start
+];
+
+const startingBoard = [
+    // black start
+    ["R1", "K1", "B1", "Q1", "K1", "B2", "K2", "R2"],
+    ["P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8"],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8"],
+    ["R1", "K1", "B1", "Q1", "K1", "B2", "K2", "R2"],
     // white start
 ];
 
@@ -71,3 +84,4 @@ class Pawn extends Pieces {
     isRookEligibleForPromotion() { }
 
 };
+

@@ -34,11 +34,22 @@ const init = () => {
 
 init();
 
+const handleClick = (event) => {
+    const pieceToMove = event.target.id;
+
+    boardElement.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const pieceDestination = event.target.id;
+        console.log(pieceToMove);
+        console.log(pieceDestination);
+    })
+}
+
 /*----------- Event Listeners ----------*/
 
-
+boardElement.addEventListener("click", handleClick);
 
 /*-------------- Graveyard -------------*/
 
-console.dir(squareElements);
-console.dir(boardElement);
+// console.dir(squareElements);
+// console.dir(boardElement);

@@ -97,8 +97,9 @@ const whitePieces = [];
 const blackPieces = [];
 
 class Pieces {
-    constructor(name, position) {
+    constructor(name, color, position) {
         this.name = name
+        this.color = color;
         this.position = position
     }
     validDestinations() { }
@@ -106,8 +107,8 @@ class Pieces {
 };
 
 class King extends Pieces {
-    constructor(name, position) {
-        super(name, position)
+    constructor(name, color, position) {
+        super(name, color, position)
         this.check = false;
     }
     validDestinations() { }
@@ -115,40 +116,40 @@ class King extends Pieces {
 };
 
 class Queen extends Pieces {
-    constructor(name, position) {
-        super(name, position)
+    constructor(name, color, position) {
+        super(name, color, position)
     }
     validDestinations() { }
 
 };
 
 class Bishop extends Pieces {
-    constructor(name, position) {
-        super(name, position)
+    constructor(name, color, position) {
+        super(name, color, position)
     }
     validDestinations() { }
 
 };
 
 class Knight extends Pieces {
-    constructor(name, position) {
-        super(name, position)
+    constructor(name, color, position) {
+        super(name, color, position)
     }
     validDestinations() { }
 
 };
 
 class Rook extends Pieces {
-    constructor(name, position) {
-        super(name, position)
+    constructor(name, color, position) {
+        super(name, color, position)
     }
     validDestinations() { }
 
 };
 
 class Pawn extends Pieces {
-    constructor(name, position) {
-        super(name, position)
+    constructor(name, color, position) {
+        super(name, color, position)
         this.firstMove = true;
         this.promotion = false;
     }

@@ -39,8 +39,8 @@ const initializeBoard = () => {
                 pieceElement.setAttribute("class", `${pieceAttributes.color} ${pieceAttributes.piece}`);
                 pieceElement.textContent = pieceAttributes.piece;
                 squareElements[i].appendChild(pieceElement);
-                if (pieceAttributes.color === "white") whitePieces.push(new pieceType(pieceAttributes.piece, squareElements[i].getAttribute("id")));
-                if (pieceAttributes.color === "black") blackPieces.push(new pieceType(pieceAttributes.piece, squareElements[i].getAttribute("id")));
+                if (pieceAttributes.color === "white") whitePieces.push(new pieceType(pieceAttributes.piece, "white", squareElements[i].getAttribute("id")));
+                if (pieceAttributes.color === "black") blackPieces.push(new pieceType(pieceAttributes.piece, "black", squareElements[i].getAttribute("id")));
             };
             i++;
         });

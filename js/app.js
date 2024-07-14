@@ -30,7 +30,7 @@ const initializeBoard = () => {
                 getPieceAttributes();
 
                 pieceElement.setAttribute("class", `${pieceAttributes.color} ${pieceAttributes.piece}`);
-                pieceElement.textContent = pieceAttributes.id;
+                pieceElement.textContent = pieceAttributes.piece;
                 squareElements[i].appendChild(pieceElement);
             };
             i++;

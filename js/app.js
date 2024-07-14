@@ -13,11 +13,27 @@ const boardElement = document.querySelector(".board");
 
 /*-------------- Functions -------------*/
 
+const initializeBoard = () => {
+    let i = 0;
+    board.forEach((row, rowIdx) => {
+        row.forEach((square, columnIdx) => {
+            if (square !== "") {
+                const pieceElement = document.createElement("div");
+                pieceElement.textContent = board[rowIdx][columnIdx];
+                squareElements[i].appendChild(pieceElement);
+            };
+            i++;
+        });
+    });
+};
+
 const updateBoard = () => {
     let i = 0;
     board.forEach((row, rowIdx) => {
         row.forEach((square, columnIdx) => {
-            if (square !== "") { squareElements[i].textContent = board[rowIdx][columnIdx]; };
+            if (square !== "") {
+
+            };
             i++;
         });
     });
@@ -29,7 +45,7 @@ const render = () => {
 
 const init = () => {
     board = startingBoard;
-    render();
+    initializeBoard();
 };
 
 init();

@@ -25,12 +25,11 @@ const initializeBoard = () => {
                     const piece = board[rowIdx][columnIdx]
                     if (rowIdx <= 1) color = "black";
                     if (rowIdx >= 6) color = "white";
-                    pieceAttributes = { class: color, id: piece };
+                    pieceAttributes = { color: color, piece: piece };
                 }
                 getPieceAttributes();
 
-                pieceElement.setAttribute("class", pieceAttributes.class);
-                pieceElement.setAttribute("id", pieceAttributes.id);
+                pieceElement.setAttribute("class", `${pieceAttributes.color} ${pieceAttributes.piece}`);
                 pieceElement.textContent = pieceAttributes.id;
                 squareElements[i].appendChild(pieceElement);
             };

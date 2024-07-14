@@ -19,7 +19,19 @@ const initializeBoard = () => {
         row.forEach((square, columnIdx) => {
             if (square !== "") {
                 const pieceElement = document.createElement("div");
-                pieceElement.textContent = board[rowIdx][columnIdx];
+                let pieceAttributes;
+                const getPieceAttributes = () => {
+                    let color;
+                    const piece = board[rowIdx][columnIdx]
+                    if (rowIdx <= 1) color = "black";
+                    if (rowIdx >= 6) color = "white";
+                    pieceAttributes = { class: color, id: piece };
+                }
+                getPieceAttributes();
+
+                pieceElement.setAttribute("class", pieceAttributes.class);
+                pieceElement.setAttribute("id", pieceAttributes.id);
+                pieceElement.textContent = pieceAttributes.id;
                 squareElements[i].appendChild(pieceElement);
             };
             i++;

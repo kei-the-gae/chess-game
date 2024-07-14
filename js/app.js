@@ -36,7 +36,7 @@ const initializeBoard = () => {
                 }
                 getPieceAttributes();
 
-                pieceElement.setAttribute("class", `${pieceAttributes.color} ${pieceAttributes.piece}`);
+                pieceElement.setAttribute("class", `piece ${pieceAttributes.color} ${pieceAttributes.piece}`);
                 pieceElement.setAttribute("draggable", "true");
                 pieceElement.textContent = pieceAttributes.piece;
                 squareElements[i].appendChild(pieceElement);
@@ -71,24 +71,19 @@ const init = () => {
 
 init();
 
-const handleClick = (event) => {
-    const pieceToMove = event.target.id;
+// additional cache for pieces created in initialization
+const pieceElements = document.querySelectorAll(".piece");
 
-    boardElement.addEventListener("click", (event) => {
-        event.stopPropagation();
-        const pieceDestination = event.target.id;
-        console.log(pieceToMove);
-        console.log(pieceDestination);
-    })
-}
+
 
 /*----------- Event Listeners ----------*/
 
-boardElement.addEventListener("click", handleClick);
+
 
 /*-------------- Graveyard -------------*/
 
 // console.dir(squareElements);
 // console.dir(boardElement);
-console.log(whitePieces);
-console.log(blackPieces);
+// console.dir(pieceElements);
+// console.log(whitePieces);
+// console.log(blackPieces);

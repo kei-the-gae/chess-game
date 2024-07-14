@@ -37,6 +37,7 @@ const initializeBoard = () => {
                 getPieceAttributes();
 
                 pieceElement.setAttribute("class", `${pieceAttributes.color} ${pieceAttributes.piece}`);
+                pieceElement.setAttribute("draggable", "true");
                 pieceElement.textContent = pieceAttributes.piece;
                 squareElements[i].appendChild(pieceElement);
                 if (pieceAttributes.color === "white") whitePieces.push(new pieceType(pieceAttributes.piece, "white", squareElements[i].getAttribute("id")));

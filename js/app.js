@@ -41,7 +41,7 @@ const initializeBoard = () => {
 
                 pieceElement.setAttribute("class", `piece ${pieceAttributes.color} ${pieceAttributes.piece}`);
                 if (pieceElement.getAttribute("class").includes("white")) pieceElement.setAttribute("draggable", "true");
-                if (pieceElement.getAttribute("class").includes("black")) pieceElement.setAttribute("draggable", "false")
+                if (pieceElement.getAttribute("class").includes("black")) pieceElement.setAttribute("draggable", "false");
                 pieceElement.textContent = pieceAttributes.piece;
                 squareElements[i].appendChild(pieceElement);
                 if (pieceAttributes.color === "white") whitePieces.push(new pieceType(pieceAttributes.piece, "white", squareElements[i].getAttribute("id")));
@@ -59,6 +59,9 @@ const init = () => {
 };
 
 init();
+
+// additional cache for pieces created in initialization
+const pieceElements = document.querySelectorAll(".piece");
 
 const findMoveStart = () => {
     if (turn === "white") {
@@ -103,6 +106,29 @@ const updateObj = () => {
     };
 };
 
+const changeTurn = () => {
+    if (turn === "white") {
+        pieceElements.forEach((piece) => {
+            if (piece.getAttribute("class").includes("white")) piece.setAttribute("draggable", "false");
+            if (piece.getAttribute("class").includes("black")) piece.setAttribute("draggable", "true");
+        });
+    };
+    if (turn === "black") {
+        pieceElements.forEach((piece) => {
+            if (piece.getAttribute("class").includes("white")) piece.setAttribute("draggable", "true");
+            if (piece.getAttribute("class").includes("black")) piece.setAttribute("draggable", "false");
+        });
+    };
+    switch (turn === "white") {
+        case true:
+            turn = "black";
+            break;
+        case false:
+            turn = "white";
+            break;
+    };
+};
+
 const render = (event) => {
     event.target.appendChild(selectedPiece);
 };
@@ -111,16 +137,12 @@ const makeTurn = (event) => {
     findMoveStart();
     updateBoard();
     updateObj();
+    changeTurn();
     render(event);
     selectedPiece = null;
     moveStart = null;
     moveDestination = null;
 };
-
-// additional cache for pieces created in initialization
-const pieceElements = document.querySelectorAll(".piece");
-
-
 
 /*----------- Event Listeners ----------*/
 

@@ -4,7 +4,8 @@
 
 /*---------- Variables (state) ---------*/
 
-
+let selectedPiece;
+let pieceDestination;
 
 /*----- Cached Element References  -----*/
 
@@ -78,7 +79,22 @@ const pieceElements = document.querySelectorAll(".piece");
 
 /*----------- Event Listeners ----------*/
 
-
+pieceElements.forEach((piece) => {
+    piece.addEventListener("dragstart", (event) => {
+        selectedPiece = event.target;
+        squareElements.forEach((square) => {
+            square.addEventListener("dragover", (event => {
+                event.preventDefault();
+            }));
+            squareElements.forEach((square) => {
+                square.addEventListener("drop", (event) => {
+                    square.appendChild(selectedPiece);
+                    selectedPiece = null;
+                });
+            });
+        });
+    });
+});
 
 /*-------------- Graveyard -------------*/
 

@@ -4,6 +4,7 @@
 
 /*---------- Variables (state) ---------*/
 
+let turn;
 let selectedPiece;
 let pieceDestination;
 
@@ -38,7 +39,8 @@ const initializeBoard = () => {
                 getPieceAttributes();
 
                 pieceElement.setAttribute("class", `piece ${pieceAttributes.color} ${pieceAttributes.piece}`);
-                pieceElement.setAttribute("draggable", "true");
+                if (pieceElement.getAttribute("class").includes("white")) pieceElement.setAttribute("draggable", "true");
+                if (pieceElement.getAttribute("class").includes("black")) pieceElement.setAttribute("draggable", "false")
                 pieceElement.textContent = pieceAttributes.piece;
                 squareElements[i].appendChild(pieceElement);
                 if (pieceAttributes.color === "white") whitePieces.push(new pieceType(pieceAttributes.piece, "white", squareElements[i].getAttribute("id")));
@@ -67,6 +69,7 @@ const render = () => {
 
 const init = () => {
     board = startingBoard;
+    turn = "white";
     initializeBoard();
 };
 

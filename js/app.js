@@ -90,25 +90,31 @@ const updateObj = () => {
             if (piece.position === moveStart) {
                 piece.position = moveDestination;
                 if (piece.name.startsWith("P") && piece.firstMove === true) piece.firstMove = false;
-            }
-        })
+            };
+        });
     };
     if (turn === "black") {
         blackPieces.find((piece) => {
             if (piece.position === moveStart) {
                 piece.position = moveDestination;
                 if (piece.name.startsWith("P") && piece.firstMove === true) piece.firstMove = false;
-            }
-        })
+            };
+        });
     };
-
 };
 
-const makeTurn = () => {
+const render = (event) => {
+    event.target.appendChild(selectedPiece);
+};
+
+const makeTurn = (event) => {
     findMoveStart();
     updateBoard();
     updateObj();
-    console.log(whitePieces);
+    render(event);
+    selectedPiece = null;
+    moveStart = null;
+    moveDestination = null;
 };
 
 // additional cache for pieces created in initialization
@@ -128,10 +134,7 @@ pieceElements.forEach((piece) => {
             squareElements.forEach((square) => {
                 square.addEventListener("drop", (event) => {
                     moveDestination = event.target.id;
-                    // console.log(selectedPiece);
-                    makeTurn();
-                    // event.target.appendChild(selectedPiece);
-                    // selectedPiece = null;
+                    makeTurn(event);
                 });
             });
         });

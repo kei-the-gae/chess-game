@@ -51,22 +51,6 @@ const initializeBoard = () => {
     });
 };
 
-const updateBoard = () => {
-    let i = 0;
-    board.forEach((row, rowIdx) => {
-        row.forEach((square, columnIdx) => {
-            if (square !== "") {
-
-            };
-            i++;
-        });
-    });
-};
-
-const render = () => {
-    updateBoard();
-};
-
 const init = () => {
     board = startingBoard;
     turn = "white";
@@ -74,6 +58,23 @@ const init = () => {
 };
 
 init();
+
+const updateBoard = () => {
+    let i = 0;
+    board.forEach((row, rowIdx) => {
+        row.forEach((square, columnIdx) => {
+            if (squareElements[i].textContent !== board[rowIdx][columnIdx]) {
+                board[rowIdx][columnIdx] = squareElements[i].textContent;
+            }
+            i++;
+        });
+
+    });
+};
+
+const makeTurn = () => {
+    updateBoard();
+}
 
 // additional cache for pieces created in initialization
 const pieceElements = document.querySelectorAll(".piece");
@@ -93,6 +94,8 @@ pieceElements.forEach((piece) => {
                 square.addEventListener("drop", (event) => {
                     square.appendChild(selectedPiece);
                     selectedPiece = null;
+                    makeTurn();
+                    console.log(board);
                 });
             });
         });
@@ -106,3 +109,4 @@ pieceElements.forEach((piece) => {
 // console.dir(pieceElements);
 // console.log(whitePieces);
 // console.log(blackPieces);
+// console.log(board);

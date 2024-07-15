@@ -67,11 +67,26 @@ const findMoveStart = () => {
     if (turn === "black") {
         blackPieces.find((piece) => { if (selectedPiece.getAttribute("class").includes(piece.name)) moveStart = piece.position })
     };
-}
+};
 
-const makeTurn = (event) => {
+const updateBoard = () => {
+    let i = 0;
+    board.forEach((row, rowIdx) => {
+        row.forEach((square, columnIdx) => {
+            if (squareElements[i].id === moveStart) {
+                board[rowIdx][columnIdx] = "";
+            };
+            if (squareElements[i].id === moveDestination) {
+                board[rowIdx][columnIdx] = selectedPiece.textContent;
+            };
+            i++;
+        });
+    });
+};
+
+const makeTurn = () => {
     findMoveStart();
-    updateBoard(event);
+    updateBoard();
 }
 
 // additional cache for pieces created in initialization
@@ -92,10 +107,9 @@ pieceElements.forEach((piece) => {
                 square.addEventListener("drop", (event) => {
                     moveDestination = event.target.id;
                     // console.log(selectedPiece);
-                    makeTurn(event);
+                    makeTurn();
                     // event.target.appendChild(selectedPiece);
                     // selectedPiece = null;
-
                 });
             });
         });

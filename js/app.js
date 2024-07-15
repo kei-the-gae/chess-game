@@ -4,6 +4,7 @@
 
 /*---------- Variables (state) ---------*/
 
+let msg;
 let turn;
 let selectedPiece;
 let moveStart;
@@ -13,6 +14,7 @@ let moveDestination;
 
 const squareElements = document.querySelectorAll(".square");
 const boardElement = document.querySelector(".board");
+const messageElement = document.querySelector("#message");
 
 /*-------------- Functions -------------*/
 
@@ -52,9 +54,15 @@ const initializeBoard = () => {
     });
 };
 
+const msgInit = () => {
+    msg = `It's ${turn}'s move`;
+    messageElement.textContent = msg;
+};
+
 const init = () => {
     board = startingBoard;
     turn = "white";
+    msgInit();
     initializeBoard();
 };
 
@@ -127,10 +135,12 @@ const changeTurn = () => {
             turn = "white";
             break;
     };
+    msg = `It's ${turn}'s move`
 };
 
 const render = (event) => {
     event.target.appendChild(selectedPiece);
+    messageElement.textContent = msg;
 };
 
 const makeTurn = (event) => {

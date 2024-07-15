@@ -6,7 +6,8 @@
 
 let turn;
 let selectedPiece;
-let pieceDestination;
+let moveStart;
+let moveDestination;
 
 /*----- Cached Element References  -----*/
 
@@ -59,21 +60,18 @@ const init = () => {
 
 init();
 
-const updateBoard = () => {
-    let i = 0;
-    board.forEach((row, rowIdx) => {
-        row.forEach((square, columnIdx) => {
-            if (squareElements[i].textContent !== board[rowIdx][columnIdx]) {
-                board[rowIdx][columnIdx] = squareElements[i].textContent;
-            }
-            i++;
-        });
+const findMoveStart = () => {
+    if (turn === "white") {
+        whitePieces.find((piece) => { if (selectedPiece.getAttribute("class").includes(piece.name)) moveStart = piece.position })
+    };
+    if (turn === "black") {
+        blackPieces.find((piece) => { if (selectedPiece.getAttribute("class").includes(piece.name)) moveStart = piece.position })
+    };
+}
 
-    });
-};
-
-const makeTurn = () => {
-    updateBoard();
+const makeTurn = (event) => {
+    findMoveStart();
+    updateBoard(event);
 }
 
 // additional cache for pieces created in initialization
@@ -92,10 +90,12 @@ pieceElements.forEach((piece) => {
             }));
             squareElements.forEach((square) => {
                 square.addEventListener("drop", (event) => {
-                    square.appendChild(selectedPiece);
-                    selectedPiece = null;
-                    makeTurn();
-                    console.log(board);
+                    moveDestination = event.target.id;
+                    // console.log(selectedPiece);
+                    makeTurn(event);
+                    // event.target.appendChild(selectedPiece);
+                    // selectedPiece = null;
+
                 });
             });
         });

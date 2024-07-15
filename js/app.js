@@ -84,10 +84,27 @@ const updateBoard = () => {
     });
 };
 
+const updateObj = () => {
+    if (turn === "white") {
+        whitePieces.find((piece) => {
+            if (piece.position === moveStart) piece.position = moveDestination;
+            if (piece.name.startsWith("P") && piece.firstMove === true) piece.firstMove = false;
+        })
+    };
+    if (turn === "black") {
+        blackPieces.find((piece) => {
+            if (piece.position === moveStart) piece.position = moveDestination;
+            if (piece.name.startsWith("P") && piece.firstMove === true) piece.firstMove = false;
+        })
+    };
+};
+
 const makeTurn = () => {
     findMoveStart();
     updateBoard();
-}
+    updateObj();
+    console.log(whitePieces);
+};
 
 // additional cache for pieces created in initialization
 const pieceElements = document.querySelectorAll(".piece");

@@ -111,7 +111,11 @@ class King extends Pieces {
         super(name, color, position)
         this.check = false;
     }
-    validDestinations() { }
+    validDestinations() {
+        const moveStartArrayIndex = notationMap[moveStart].boardArrayIndex
+        const moveDestinationArrayIndex = notationMap[moveDestination].boardArrayIndex
+
+    }
 
 };
 
@@ -119,7 +123,11 @@ class Queen extends Pieces {
     constructor(name, color, position) {
         super(name, color, position)
     }
-    validDestinations() { }
+    validDestinations() {
+        const moveStartArrayIndex = notationMap[moveStart].boardArrayIndex
+        const moveDestinationArrayIndex = notationMap[moveDestination].boardArrayIndex
+
+    }
 
 };
 
@@ -127,7 +135,11 @@ class Bishop extends Pieces {
     constructor(name, color, position) {
         super(name, color, position)
     }
-    validDestinations() { }
+    validDestinations() {
+        const moveStartArrayIndex = notationMap[moveStart].boardArrayIndex
+        const moveDestinationArrayIndex = notationMap[moveDestination].boardArrayIndex
+
+    }
 
 };
 
@@ -135,7 +147,35 @@ class Knight extends Pieces {
     constructor(name, color, position) {
         super(name, color, position)
     }
-    validDestinations() { }
+    validDestinations() {
+        const moveStartArrayIndex = notationMap[moveStart].boardArrayIndex
+        const moveDestinationArrayIndex = notationMap[moveDestination].boardArrayIndex
+        if (moveStartArrayIndex[0] + 2 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] + 1 === moveDestinationArrayIndex[1]) {
+            //continue
+        }
+        if (moveStartArrayIndex[0] + 2 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] - 1 === moveDestinationArrayIndex[1]) {
+            //continue
+        }
+        if (moveStartArrayIndex[0] + 1 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] + 2 === moveDestinationArrayIndex[1]) {
+            //continue
+        }
+        if (moveStartArrayIndex[0] + 1 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] - 2 === moveDestinationArrayIndex[1]) {
+            //continue
+        }
+        if (moveStartArrayIndex[0] - 2 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] + 1 === moveDestinationArrayIndex[1]) {
+            //continue
+        }
+        if (moveStartArrayIndex[0] - 2 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] - 1 === moveDestinationArrayIndex[1]) {
+            //continue
+        }
+        if (moveStartArrayIndex[0] - 1 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] + 2 === moveDestinationArrayIndex[1]) {
+            //continue
+        }
+        if (moveStartArrayIndex[0] - 1 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] - 2 === moveDestinationArrayIndex[1]) {
+            //continue
+        }
+        //if moveDestinationArrayIndex has opposing piece, capture
+    }
 
 };
 
@@ -143,7 +183,13 @@ class Rook extends Pieces {
     constructor(name, color, position) {
         super(name, color, position)
     }
-    validDestinations() { }
+    validDestinations() {
+        const moveStartArrayIndex = notationMap[moveStart].boardArrayIndex
+        const moveDestinationArrayIndex = notationMap[moveDestination].boardArrayIndex
+        if (moveStartArrayIndex[0] === moveDestinationArrayIndex[0] || moveDestinationArrayIndex[1] === moveDestinationArrayIndex) {
+            //continue
+        };
+    }
 
 };
 
@@ -154,9 +200,38 @@ class Pawn extends Pieces {
         this.promotion = false;
     }
     validDestinations() {
-
+        const moveStartArrayIndex = notationMap[moveStart].boardArrayIndex
+        const moveDestinationArrayIndex = notationMap[moveDestination].boardArrayIndex
+        if (this.color === "white") {
+            if (this.firstMove === true && moveStartArrayIndex[0] - 2 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] === moveDestinationArrayIndex[1]) {
+                //continue
+            }
+            if (moveStartArrayIndex[0] - 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] === moveDestinationArrayIndex[1]) {
+                //continue
+            }
+            if (moveStartArrayIndex[0] - 1 && moveStartArrayIndex[1] + 1 && moveStartArrayIndex[1] - 1) //&& moveDestinationArrayIndex has opposing piece
+            {
+                //take piece
+            }
+            if (this.color === "black") {
+                if (this.firstMove === true && moveStartArrayIndex[0] + 2 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] === moveDestinationArrayIndex[1]) {
+                    //continue
+                }
+                if (moveStartArrayIndex[0] + 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] === moveDestinationArrayIndex[1]) {
+                    //continue
+                }
+                if (moveStartArrayIndex[0] + 1 && moveStartArrayIndex[1] + 1 && moveStartArrayIndex[1] - 1) //&& moveDestinationArrayIndex has opposing piece
+                {
+                    //take piece
+                }
+            }
+        }
     }
-    isRookEligibleForPromotion() { }
-
-};
+    isRookEligibleForPromotion() {
+        if (moveDestinationArrayIndex[0] === 0 || moveDestinationArrayIndex === 7) {
+            this.promotion === true;
+            //pick new piece
+        }
+    }
+}
 

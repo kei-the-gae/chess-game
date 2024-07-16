@@ -61,7 +61,7 @@ const msgInit = () => {
 };
 
 const init = () => {
-    board = startingBoard;
+    board = startingBoard.map((arr) => { return arr.slice() });
     turn = "white";
     msgInit();
     initializeBoard();
@@ -160,7 +160,7 @@ const reset = () => {
     pieceElements.forEach(piece => piece.remove());
     whitePieces.splice(0, whitePieces.length);
     blackPieces.splice(0, blackPieces.length);
-    init(); // board reset isnt functioning. startingBoard is being modified during drag event listener and idk why
+    init(); // reset currently breaking event listener for further games
     // console.log(board);
     // console.log(whitePieces);
     // console.log(blackPieces);

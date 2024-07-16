@@ -15,6 +15,7 @@ let moveDestination;
 const squareElements = document.querySelectorAll(".square");
 const boardElement = document.querySelector(".board");
 const messageElement = document.querySelector("#message");
+const resetElement = document.querySelector("#reset");
 
 /*-------------- Functions -------------*/
 
@@ -154,10 +155,22 @@ const makeTurn = (event) => {
     moveDestination = null;
 };
 
+const reset = () => {
+    console.log("resetting");
+    pieceElements.forEach(piece => piece.remove());
+    whitePieces.splice(0, whitePieces.length);
+    blackPieces.splice(0, blackPieces.length);
+    init(); // board reset isnt functioning. startingBoard is being modified during drag event listener and idk why
+    // console.log(board);
+    // console.log(whitePieces);
+    // console.log(blackPieces);
+};
+
 /*----------- Event Listeners ----------*/
 
 pieceElements.forEach((piece) => {
     piece.addEventListener("dragstart", (event) => {
+        console.log("dragging");
         selectedPiece = event.target;
         squareElements.forEach((square) => {
             square.addEventListener("dragover", (event => {
@@ -172,6 +185,8 @@ pieceElements.forEach((piece) => {
         });
     });
 });
+
+resetElement.addEventListener("click", reset);
 
 /*-------------- Graveyard -------------*/
 

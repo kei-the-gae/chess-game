@@ -175,9 +175,7 @@ pieceElements.forEach((piece) => {
 
 /*-------------- Graveyard -------------*/
 
-// console.dir(squareElements);
-// console.dir(boardElement);
-// console.dir(pieceElements);
 // console.log(whitePieces);
 // console.log(blackPieces);
 // console.log(board);
+// console.log(notationMap);

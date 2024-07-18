@@ -74,17 +74,24 @@ const pieceElements = document.querySelectorAll(".piece");
 
 const findMoveStart = () => {
     if (turn === "white") {
-        whitePieces.find((piece) => { if (selectedPiece.getAttribute("class").includes(piece.name)) moveStart = piece.position })
+        whitePieces.find((piece) => { if (selectedPiece && selectedPiece.getAttribute("class").includes(piece.name)) moveStart = piece.position })
     };
     if (turn === "black") {
-        blackPieces.find((piece) => { if (selectedPiece.getAttribute("class").includes(piece.name)) moveStart = piece.position })
+        blackPieces.find((piece) => { if (selectedPiece && selectedPiece.getAttribute("class").includes(piece.name)) moveStart = piece.position })
     };
 };
 
 const capturePiece = () => {
+    let notationMapObj = notationMap[moveDestination];
+    console.log(notationMapObj);
+    let moveDestinationArrayIndex = notationMapObj.boardArrayIndex;
+    console.log(moveStart);
+    console.log(moveDestination);
+    console.log(selectedPiece);
     if (board[moveDestinationArrayIndex[0]][moveDestinationArrayIndex[1]] !== "") {
-        const index = notationMap[moveStart].squareElsIndex;
-        pieceElements[index].remove();
+        const index = notationMapObj.squareElsIndex;
+        board[moveDestinationArrayIndex[0]][moveDestinationArrayIndex[1]] === ""
+        squareElements[index].innerHTML = ""
     }
 }
 
@@ -95,7 +102,7 @@ const updateBoard = () => {
             if (squareElements[i].id === moveStart) {
                 board[rowIdx][columnIdx] = "";
             };
-            if (squareElements[i].id === moveDestination) {
+            if (squareElements[i].id === moveDestination && selectedPiece) {
                 board[rowIdx][columnIdx] = selectedPiece.textContent;
             };
             i++;
@@ -147,19 +154,23 @@ const changeTurn = () => {
 };
 
 const render = (event) => {
-    event.target.appendChild(selectedPiece);
+    if (selectedPiece) {
+        event.target.appendChild(selectedPiece);
+    };
     messageElement.textContent = msg;
 };
 
 const makeTurn = (event) => {
     findMoveStart();
+    console.log(moveDestination);
+    capturePiece();
     updateBoard();
     updateObj();
     changeTurn();
     render(event);
     selectedPiece = null;
-    moveStart = null;
-    moveDestination = null;
+    // moveStart = null;
+    // moveDestination = null;
 };
 
 
@@ -167,7 +178,6 @@ const makeTurn = (event) => {
 
 pieceElements.forEach((piece) => {
     piece.addEventListener("dragstart", (event) => {
-        console.log("dragging");
         selectedPiece = event.target;
         squareElements.forEach((square) => {
             square.addEventListener("dragover", (event => {

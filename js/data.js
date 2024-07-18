@@ -98,26 +98,25 @@ const blackPieces = [];
 
 class Pieces {
     constructor(name, color, position) {
-        this.name = name
+        this.name = name;
         this.color = color;
-        this.position = position
+        this.position = position;
     }
-    validDestinations() { }
+    validDestinations(event) { }
     isKingInCheck() { }
 };
 
 class King extends Pieces {
     constructor(name, color, position) {
-        super(name, color, position)
+        super(name, color, position);
         this.check = false;
     }
-    validDestinations() {
-        const moveStartArrayIndex = notationMap[moveStart].boardArrayIndex
-        const moveDestinationArrayIndex = notationMap[moveDestination].boardArrayIndex
+    validDestinations(event) {
+        const moveStartArrayIndex = notationMap[moveStart].boardArrayIndex;
+        const moveDestinationArrayIndex = notationMap[moveDestination].boardArrayIndex;
         if ((moveStartArrayIndex[0] === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 1 === moveDestinationArrayIndex[1])) {
-            //continue
+            capturePiece(event);
         }
-        //if moveDestinationArrayIndex has opposing piece, capture
 
     }
 
@@ -125,33 +124,28 @@ class King extends Pieces {
 
 class Queen extends Pieces {
     constructor(name, color, position) {
-        super(name, color, position)
+        super(name, color, position);
     }
-    validDestinations() {
-        const moveStartArrayIndex = notationMap[moveStart].boardArrayIndex
-        const moveDestinationArrayIndex = notationMap[moveDestination].boardArrayIndex
-        if ((moveStartArrayIndex[0] + 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 2 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 2 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 3 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 3 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 4 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 4 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 5 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 5 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 6 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 6 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 7 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 7 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 2 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 2 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 3 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 3 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 4 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 4 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 5 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 5 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 6 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 6 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 7 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 7 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 2 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 2 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 3 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 3 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 4 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 4 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 5 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 5 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 6 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 6 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 7 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 7 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 2 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 2 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 3 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 3 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 4 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 4 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 5 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 5 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 6 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 6 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 7 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 7 === moveDestinationArrayIndex[1])) {
-            //continue
+    validDestinations(event) {
+        const moveStartArrayIndex = notationMap[moveStart].boardArrayIndex;
+        const moveDestinationArrayIndex = notationMap[moveDestination].boardArrayIndex;
+        if ((moveStartArrayIndex[0] + 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 2 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 2 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 3 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 3 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 4 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 4 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 5 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 5 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 6 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 6 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 7 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 7 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 2 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 2 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 3 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 3 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 4 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 4 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 5 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 5 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 6 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 6 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 7 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 7 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 2 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 2 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 3 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 3 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 4 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 4 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 5 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 5 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 6 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 6 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 7 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 7 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 2 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 2 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 3 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 3 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 4 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 4 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 5 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 5 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 6 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 6 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 7 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 7 === moveDestinationArrayIndex[1]) || moveStartArrayIndex[0] === moveDestinationArrayIndex[0] || moveDestinationArrayIndex[1] === moveDestinationArrayIndex) {
+            capturePiece(event);
         };
-        if (moveStartArrayIndex[0] === moveDestinationArrayIndex[0] || moveDestinationArrayIndex[1] === moveDestinationArrayIndex) {
-            //continue
-        };
-        //if moveDestinationArrayIndex has opposing piece, capture
-    }
 
+    }
 };
 
 class Bishop extends Pieces {
     constructor(name, color, position) {
-        super(name, color, position)
+        super(name, color, position);
     }
-    validDestinations() {
-        const moveStartArrayIndex = notationMap[moveStart].boardArrayIndex
-        const moveDestinationArrayIndex = notationMap[moveDestination].boardArrayIndex
+    validDestinations(event) {
+        const moveStartArrayIndex = notationMap[moveStart].boardArrayIndex;
+        const moveDestinationArrayIndex = notationMap[moveDestination].boardArrayIndex;
         if ((moveStartArrayIndex[0] + 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 2 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 2 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 3 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 3 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 4 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 4 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 5 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 5 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 6 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 6 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 7 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 7 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 2 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 2 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 3 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 3 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 4 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 4 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 5 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 5 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 6 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 6 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 7 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 7 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 2 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 2 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 3 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 3 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 4 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 4 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 5 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 5 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 6 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 6 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 7 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] - 7 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 2 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 2 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 3 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 3 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 4 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 4 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 5 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 5 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 6 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 6 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 7 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] + 7 === moveDestinationArrayIndex[1])) {
-            //continue
+            capturePiece(event);
         };
-        //if moveDestinationArrayIndex has opposing piece, capture
 
     }
 
@@ -159,49 +153,28 @@ class Bishop extends Pieces {
 
 class Knight extends Pieces {
     constructor(name, color, position) {
-        super(name, color, position)
+        super(name, color, position);
     }
-    validDestinations() {
-        const moveStartArrayIndex = notationMap[moveStart].boardArrayIndex
-        const moveDestinationArrayIndex = notationMap[moveDestination].boardArrayIndex
-        if (moveStartArrayIndex[0] + 2 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] + 1 === moveDestinationArrayIndex[1]) {
-            //continue
+    validDestinations(event) {
+        const moveStartArrayIndex = notationMap[moveStart].boardArrayIndex;
+        const moveDestinationArrayIndex = notationMap[moveDestination].boardArrayIndex;
+        if ((moveStartArrayIndex[0] + 2 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] + 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 2 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] - 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 1 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] + 2 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 1 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] - 2 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 2 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] + 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 2 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] - 1 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 1 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] + 2 === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 1 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] - 2 === moveDestinationArrayIndex[1])) {
+            capturePiece(event);
         }
-        if (moveStartArrayIndex[0] + 2 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] - 1 === moveDestinationArrayIndex[1]) {
-            //continue
-        }
-        if (moveStartArrayIndex[0] + 1 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] + 2 === moveDestinationArrayIndex[1]) {
-            //continue
-        }
-        if (moveStartArrayIndex[0] + 1 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] - 2 === moveDestinationArrayIndex[1]) {
-            //continue
-        }
-        if (moveStartArrayIndex[0] - 2 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] + 1 === moveDestinationArrayIndex[1]) {
-            //continue
-        }
-        if (moveStartArrayIndex[0] - 2 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] - 1 === moveDestinationArrayIndex[1]) {
-            //continue
-        }
-        if (moveStartArrayIndex[0] - 1 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] + 2 === moveDestinationArrayIndex[1]) {
-            //continue
-        }
-        if (moveStartArrayIndex[0] - 1 === moveDestinationArrayIndex[0] && moveDestinationArrayIndex[1] - 2 === moveDestinationArrayIndex[1]) {
-            //continue
-        }
-        //if moveDestinationArrayIndex has opposing piece, capture
+
     }
 
 };
 
 class Rook extends Pieces {
     constructor(name, color, position) {
-        super(name, color, position)
+        super(name, color, position);
     }
-    validDestinations() {
-        const moveStartArrayIndex = notationMap[moveStart].boardArrayIndex
-        const moveDestinationArrayIndex = notationMap[moveDestination].boardArrayIndex
+    validDestinations(event) {
+        const moveStartArrayIndex = notationMap[moveStart].boardArrayIndex;
+        const moveDestinationArrayIndex = notationMap[moveDestination].boardArrayIndex;
         if (moveStartArrayIndex[0] === moveDestinationArrayIndex[0] || moveDestinationArrayIndex[1] === moveDestinationArrayIndex) {
-            //continue
+            capturePiece(event);
         };
     }
 
@@ -209,37 +182,32 @@ class Rook extends Pieces {
 
 class Pawn extends Pieces {
     constructor(name, color, position) {
-        super(name, color, position)
+        super(name, color, position);
         this.firstMove = true;
         this.promotion = false;
     }
-    validDestinations() {
-        const moveStartArrayIndex = notationMap[moveStart].boardArrayIndex
-        const moveDestinationArrayIndex = notationMap[moveDestination].boardArrayIndex
+    validDestinations(event) {
+        const moveStartArrayIndex = notationMap[moveStart].boardArrayIndex;
+        const moveDestinationArrayIndex = notationMap[moveDestination].boardArrayIndex;
         if (this.color === "white") {
-            if (this.firstMove === true && moveStartArrayIndex[0] - 2 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] === moveDestinationArrayIndex[1]) {
+            if ((this.firstMove === true && moveStartArrayIndex[0] - 2 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] - 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] === moveDestinationArrayIndex[1])) {
                 //continue
-            }
-            if (moveStartArrayIndex[0] - 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] === moveDestinationArrayIndex[1]) {
+            };
+
+            if (moveStartArrayIndex[0] - 1 && (moveStartArrayIndex[1] + 1 || moveStartArrayIndex[1] - 1) && board[moveDestinationArrayIndex[0]][moveDestinationArrayIndex[1]] !== "") {
+                capturePiece(event);
+            };
+        };
+        if (this.color === "black") {
+            if ((this.firstMove === true && moveStartArrayIndex[0] + 2 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] === moveDestinationArrayIndex[1]) || (moveStartArrayIndex[0] + 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] === moveDestinationArrayIndex[1])) {
                 //continue
-            }
-            if (moveStartArrayIndex[0] - 1 && moveStartArrayIndex[1] + 1 && moveStartArrayIndex[1] - 1) //&& moveDestinationArrayIndex has opposing piece
-            {
-                //take piece
-            }
-            if (this.color === "black") {
-                if (this.firstMove === true && moveStartArrayIndex[0] + 2 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] === moveDestinationArrayIndex[1]) {
-                    //continue
-                }
-                if (moveStartArrayIndex[0] + 1 === moveDestinationArrayIndex[0] && moveStartArrayIndex[1] === moveDestinationArrayIndex[1]) {
-                    //continue
-                }
-                if (moveStartArrayIndex[0] + 1 && moveStartArrayIndex[1] + 1 && moveStartArrayIndex[1] - 1) //&& moveDestinationArrayIndex has opposing piece
-                {
-                    //take piece
-                }
-            }
-        }
+            };
+
+            if (moveStartArrayIndex[0] - 1 && (moveStartArrayIndex[1] + 1 || moveStartArrayIndex[1] - 1) && board[moveDestinationArrayIndex[0]][moveDestinationArrayIndex[1]] !== "") {
+                capturePiece(event);
+            };
+        };
+
     }
     isRookEligibleForPromotion() {
         if (moveDestinationArrayIndex[0] === 0 || moveDestinationArrayIndex === 7) {

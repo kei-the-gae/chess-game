@@ -81,6 +81,13 @@ const findMoveStart = () => {
     };
 };
 
+const capturePiece = () => {
+    if (board[moveDestinationArrayIndex[0]][moveDestinationArrayIndex[1]] !== "") {
+        const index = notationMap[moveStart].squareElsIndex;
+        pieceElements[index].remove();
+    }
+}
+
 const updateBoard = () => {
     let i = 0;
     board.forEach((row, rowIdx) => {

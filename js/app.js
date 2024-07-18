@@ -74,14 +74,15 @@ const pieceElements = document.querySelectorAll(".piece");
 
 const findMoveStart = () => {
     if (turn === "white") {
-        whitePieces.find((piece) => { if (selectedPiece && selectedPiece.getAttribute("class").includes(piece.name)) moveStart = piece.position })
+        whitePieces.find((piece) => { if (selectedPiece.getAttribute("class").includes(piece.name)) moveStart = piece.position })
     };
     if (turn === "black") {
-        blackPieces.find((piece) => { if (selectedPiece && selectedPiece.getAttribute("class").includes(piece.name)) moveStart = piece.position })
+        blackPieces.find((piece) => { if (selectedPiece.getAttribute("class").includes(piece.name)) moveStart = piece.position })
     };
 };
 
 const capturePiece = () => {
+    console.log(moveDestination);
     let notationMapObj = notationMap[moveDestination];
     console.log(notationMapObj);
     let moveDestinationArrayIndex = notationMapObj.boardArrayIndex;
@@ -90,8 +91,8 @@ const capturePiece = () => {
     console.log(selectedPiece);
     if (board[moveDestinationArrayIndex[0]][moveDestinationArrayIndex[1]] !== "") {
         const index = notationMapObj.squareElsIndex;
-        board[moveDestinationArrayIndex[0]][moveDestinationArrayIndex[1]] === ""
-        squareElements[index].innerHTML = ""
+        board[moveDestinationArrayIndex[0]][moveDestinationArrayIndex[1]] = ""
+        squareElements[index].innerHTML = selectedPiece.textContent;
     }
 }
 
@@ -102,7 +103,7 @@ const updateBoard = () => {
             if (squareElements[i].id === moveStart) {
                 board[rowIdx][columnIdx] = "";
             };
-            if (squareElements[i].id === moveDestination && selectedPiece) {
+            if (squareElements[i].id === moveDestination) {
                 board[rowIdx][columnIdx] = selectedPiece.textContent;
             };
             i++;
@@ -130,6 +131,7 @@ const updateObj = () => {
 };
 
 const changeTurn = () => {
+    // console.log(turn);
     if (turn === "white") {
         pieceElements.forEach((piece) => {
             if (piece.getAttribute("class").includes("white")) piece.setAttribute("draggable", "false");
@@ -151,24 +153,22 @@ const changeTurn = () => {
             break;
     };
     msg = `It's ${turn}'s move`
+    // console.log("switching turns", turn);
 };
 
 const render = (event) => {
-    if (selectedPiece) {
-        event.target.appendChild(selectedPiece);
-    };
+    event.target.appendChild(selectedPiece);
     messageElement.textContent = msg;
 };
 
 const makeTurn = (event) => {
     findMoveStart();
-    console.log(moveDestination);
     capturePiece();
     updateBoard();
     updateObj();
     changeTurn();
     render(event);
-    selectedPiece = null;
+    // selectedPiece = null;
     // moveStart = null;
     // moveDestination = null;
 };
@@ -176,22 +176,46 @@ const makeTurn = (event) => {
 
 /*----------- Event Listeners ----------*/
 
-pieceElements.forEach((piece) => {
+// pieceElements.forEach((piece) => {
+//     piece.addEventListener("dragstart", (event) => {
+//         selectedPiece = event.target;
+//         squareElements.forEach((square) => {
+//             square.addEventListener("dragover", (event => {
+//                 event.preventDefault();
+//             }));
+//             squareElements.forEach((square) => {
+//                 square.addEventListener("drop", (event) => {
+//                     moveDestination = event.target.id;
+//                     makeTurn(event);
+//                 });
+//             });
+//         });
+//     });
+// });
+
+for (let piece of pieceElements) {
     piece.addEventListener("dragstart", (event) => {
+        event.stopPropagation();
         selectedPiece = event.target;
-        squareElements.forEach((square) => {
-            square.addEventListener("dragover", (event => {
-                event.preventDefault();
-            }));
-            squareElements.forEach((square) => {
-                square.addEventListener("drop", (event) => {
-                    moveDestination = event.target.id;
-                    makeTurn(event);
-                });
-            });
-        });
+    })
+};
+for (let square of squareElements) {
+    square.addEventListener("dragover", (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+    })
+};
+for (let square of squareElements) {
+    square.addEventListener("drop", (event) => {
+        console.log(event);
+        event.stopPropagation();
+        event.preventDefault();
+        // console.log(event.target.childNodes[0]?.parentNode.parentNode.id);
+        moveDestination = event.target.id.length ? event.target.id : event.target.childNodes[0]?.parentNode.parentNode.id;
+        makeTurn(event);
     });
-});
+};
+
 
 /*-------------- Graveyard -------------*/
 

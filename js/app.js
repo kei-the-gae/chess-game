@@ -9,6 +9,7 @@ let turn;
 let selectedPiece;
 let moveStart;
 let moveDestination;
+let capturedPiece;
 
 /*----- Cached Element References  -----*/
 
@@ -82,16 +83,18 @@ const findMoveStart = () => {
 };
 
 const capturePiece = () => {
-    console.log(moveDestination);
+    // console.log(moveDestination);
     let notationMapObj = notationMap[moveDestination];
-    console.log(notationMapObj);
+    // console.log(notationMapObj);
     let moveDestinationArrayIndex = notationMapObj.boardArrayIndex;
-    console.log(moveStart);
-    console.log(moveDestination);
-    console.log(selectedPiece);
+    // console.log(moveStart);
+    // console.log(moveDestination);
+    // console.log(selectedPiece);
     if (board[moveDestinationArrayIndex[0]][moveDestinationArrayIndex[1]] !== "") {
         const index = notationMapObj.squareElsIndex;
         board[moveDestinationArrayIndex[0]][moveDestinationArrayIndex[1]] = ""
+        capturedPiece = squareElements[index].innerHTML;
+        console.log(capturedPiece);
         squareElements[index].innerHTML = selectedPiece.textContent;
     }
 }
@@ -119,6 +122,12 @@ const updateObj = () => {
                 if (piece.name.startsWith("P") && piece.firstMove === true) piece.firstMove = false;
             };
         });
+        if (capturedPiece) {
+            blackPieces.forEach((piece, i) => {
+                if (capturedPiece.includes(piece.name)) blackPieces.splice(i, 1);
+            });
+            console.log(blackPieces);
+        };
     };
     if (turn === "black") {
         blackPieces.find((piece) => {
@@ -127,6 +136,12 @@ const updateObj = () => {
                 if (piece.name.startsWith("P") && piece.firstMove === true) piece.firstMove = false;
             };
         });
+        if (capturedPiece) {
+            whitePieces.forEach((piece, i) => {
+                if (capturedPiece.includes(piece.name)) whitePieces.splice(i, 1);
+            });
+            console.log(whitePieces);
+        };
     };
 };
 
@@ -168,9 +183,10 @@ const makeTurn = (event) => {
     updateObj();
     changeTurn();
     render(event);
-    // selectedPiece = null;
-    // moveStart = null;
-    // moveDestination = null;
+    selectedPiece = null;
+    moveStart = null;
+    moveDestination = null;
+    capturedPiece = null;
 };
 
 
@@ -207,7 +223,7 @@ for (let square of squareElements) {
 };
 for (let square of squareElements) {
     square.addEventListener("drop", (event) => {
-        console.log(event);
+        // console.log(event);
         event.stopPropagation();
         event.preventDefault();
         // console.log(event.target.childNodes[0]?.parentNode.parentNode.id);

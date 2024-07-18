@@ -155,16 +155,6 @@ const makeTurn = (event) => {
     moveDestination = null;
 };
 
-const reset = () => {
-    console.log("resetting");
-    pieceElements.forEach(piece => piece.remove());
-    whitePieces.splice(0, whitePieces.length);
-    blackPieces.splice(0, blackPieces.length);
-    init(); // reset currently breaking event listener for further games
-    // console.log(board);
-    // console.log(whitePieces);
-    // console.log(blackPieces);
-};
 
 /*----------- Event Listeners ----------*/
 
@@ -185,8 +175,6 @@ pieceElements.forEach((piece) => {
         });
     });
 });
-
-resetElement.addEventListener("click", reset);
 
 /*-------------- Graveyard -------------*/
 

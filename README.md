@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./Screenshot 2024-07-19 at 10.16.31 AM.png"/>
+</p>
+
 # Web Chess
 *It aint pretty but it kinda works. Chess conisseurs beware.*
 
@@ -8,6 +12,7 @@ I was in chess club in high school. I think the way this turned out kinda sums u
 \
 Don't cheat. I'm watching you :\)\
 Don't drag pieces onto pieces. Don't say I didn't warn you\
+A King being captured wins the game. It searches the array of players' pieces and if a K1 isn't found the opposite player from the missing King is the winner\
 \
 ![ugly](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjJ6NGQzMDNvdTRlcnl0c2pyMWoydWt1dGNkbTdoMHU2aTNkc3FlNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/qdBHt01vnl972/giphy.gif)
 

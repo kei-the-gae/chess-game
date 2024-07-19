@@ -83,19 +83,13 @@ const findMoveStart = () => {
 };
 
 const capturePiece = () => {
-    // console.log(moveDestination);
     let notationMapObj = notationMap[moveDestination];
-    // console.log(notationMapObj);
     let moveDestinationArrayIndex = notationMapObj.boardArrayIndex;
-    // console.log(moveStart);
-    // console.log(moveDestination);
-    // console.log(selectedPiece);
     if (board[moveDestinationArrayIndex[0]][moveDestinationArrayIndex[1]] !== "") {
         const index = notationMapObj.squareElsIndex;
         board[moveDestinationArrayIndex[0]][moveDestinationArrayIndex[1]] = ""
         capturedPiece = squareElements[index].innerHTML;
-        console.log(capturedPiece);
-        squareElements[index].innerHTML = selectedPiece.textContent;
+        squareElements[index].childNodes[0].replaceWith("");
     }
 }
 
@@ -126,7 +120,6 @@ const updateObj = () => {
             blackPieces.forEach((piece, i) => {
                 if (capturedPiece.includes(piece.name)) blackPieces.splice(i, 1);
             });
-            console.log(blackPieces);
         };
     };
     if (turn === "black") {
@@ -140,13 +133,11 @@ const updateObj = () => {
             whitePieces.forEach((piece, i) => {
                 if (capturedPiece.includes(piece.name)) whitePieces.splice(i, 1);
             });
-            console.log(whitePieces);
         };
     };
 };
 
 const changeTurn = () => {
-    // console.log(turn);
     if (turn === "white") {
         pieceElements.forEach((piece) => {
             if (piece.getAttribute("class").includes("white")) piece.setAttribute("draggable", "false");
@@ -168,8 +159,20 @@ const changeTurn = () => {
             break;
     };
     msg = `It's ${turn}'s move`
-    // console.log("switching turns", turn);
 };
+
+const isKingCaptured = () => {
+    let whiteKing;
+    let blackKing;
+    whitePieces.find((piece) => { if (piece.name === "K1") whiteKing = true });
+    blackPieces.find((piece) => { if (piece.name === "K1") blackKing = true });
+    if (whiteKing !== true) {
+        msg = `Black wins!`
+    };
+    if (blackKing !== true) {
+        msg = `White wins!`
+    };
+}
 
 const render = (event) => {
     event.target.appendChild(selectedPiece);
@@ -182,32 +185,17 @@ const makeTurn = (event) => {
     updateBoard();
     updateObj();
     changeTurn();
+    isKingCaptured();
     render(event);
     selectedPiece = null;
     moveStart = null;
     moveDestination = null;
     capturedPiece = null;
+
 };
 
 
 /*----------- Event Listeners ----------*/
-
-// pieceElements.forEach((piece) => {
-//     piece.addEventListener("dragstart", (event) => {
-//         selectedPiece = event.target;
-//         squareElements.forEach((square) => {
-//             square.addEventListener("dragover", (event => {
-//                 event.preventDefault();
-//             }));
-//             squareElements.forEach((square) => {
-//                 square.addEventListener("drop", (event) => {
-//                     moveDestination = event.target.id;
-//                     makeTurn(event);
-//                 });
-//             });
-//         });
-//     });
-// });
 
 for (let piece of pieceElements) {
     piece.addEventListener("dragstart", (event) => {
@@ -223,19 +211,10 @@ for (let square of squareElements) {
 };
 for (let square of squareElements) {
     square.addEventListener("drop", (event) => {
-        // console.log(event);
         event.stopPropagation();
         event.preventDefault();
-        // console.log(event.target.childNodes[0]?.parentNode.parentNode.id);
         moveDestination = event.target.id.length ? event.target.id : event.target.childNodes[0]?.parentNode.parentNode.id;
         makeTurn(event);
     });
 };
 
-
-/*-------------- Graveyard -------------*/
-
-// console.log(whitePieces);
-// console.log(blackPieces);
-// console.log(board);
-// console.log(notationMap);
